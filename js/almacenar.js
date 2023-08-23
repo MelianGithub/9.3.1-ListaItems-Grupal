@@ -1,11 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const agregarItem = document.getElementById('agregar');
     const contenedor = document.getElementById('contenedor');
     const limpiar = document.getElementById('limpiar');
-
-    let items = JSON.parse(localStorage.getItem('listado'));
+    const valorItem = document.getElementById('item');
+    let items = JSON.parse(localStorage.getItem('listado')) || [];
 
     const actualizarDatosContenedor = () => {
         contenedor.innerHTML = '';
@@ -20,18 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     agregarItem.addEventListener('click', () => {
 
-        const item = document.getElementById('item').value;
+        const item = valorItem.value;
         items.push(item)
         localStorage.setItem('listado', JSON.stringify(items))
-
-
+        valorItem.value = '';
         actualizarDatosContenedor();
+
     })
 
     limpiar.addEventListener('click', () => {
         localStorage.removeItem('listado');
-        items = []; 
-        actualizarDatosContenedor(); 
+        items = [];
+        actualizarDatosContenedor();
     });
 });
+
 
